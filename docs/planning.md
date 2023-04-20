@@ -44,6 +44,7 @@ Naming convention:
 
 - ID
     - Block, underscore and a 3-digit running number
+    - This is a bad idea. We need to be able to change the block of a sensor and the id should be considered static
 - Block
     - Letter of the building and a 2-digit number of the zone
 
@@ -86,7 +87,9 @@ This could come in handy if we ever decide to add other types of sensors.
 
 - Error events are saved as a separate table
 - When an error occurs the sensor sends an error message with the code and timestamp to the api
-- When the sensor is fixed it sends a message with the code 0 and timestamp to the api
+- Lets also save when the sensor is back to normal
+    - This won't come from the sensor itself, but from the admin panel
+    - But if in the future the sensors are able to fix themselves, this should work as well
 
 ---
 

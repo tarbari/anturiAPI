@@ -1,5 +1,10 @@
+# Ignore IDE, virtualenv, and build files
 .idea/
 out/
 venv/
+__pycache__/
 
+# TODO: Remove this once you're done initialising it
+# Ignore database files for now
+database.db
 
