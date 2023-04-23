@@ -1,20 +1,10 @@
 from pydantic import BaseModel
 
 
-# TODO: If you add separate id column to Sensors class, add it here too
-class Sensor(BaseModel):
-    name: str
-    block: str
-    sensor_type: int
-    status_code: int
-
-    class Config:
-        orm_mode = True
-
-
 class MeasurementIn(BaseModel):
-    sensor: str
-    sensor_type: int
+    name: str
+    value: float
+    type: str
     timestamp: int
 
 
@@ -22,8 +12,22 @@ class MeasurementDb(MeasurementIn):
     id: int
 
 
+class Sensor(BaseModel):
+    name: str
+    block: str
+    type: str
+    status_code: int
+
+    class Config:
+        orm_mode = True
+
+
+class SensorExtended(Sensor):
+    measurements: list[MeasurementIn]
+
+
 class ErrorIn(BaseModel):
-    sensor: str
+    name: str
     status_code: int
     timestamp: int
 

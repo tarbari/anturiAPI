@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from .init_db import Base
+from .initialize_database import Base
 
 
 # TODO: Sensors class might need a separate id column
