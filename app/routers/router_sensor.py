@@ -14,16 +14,14 @@ def get_sensors(db: Session = Depends(get_db)):
     return crud_read_all_sensors(db)
 
 
-@router.post('', response_model=SensorExtended, status_code=status.HTTP_201_CREATED)
-def create_new_sensor(sensor: SensorExtended, db: Session = Depends(get_db)):
+@router.post('', response_model=Sensor, status_code=status.HTTP_201_CREATED)
+def create_new_sensor(sensor: Sensor, db: Session = Depends(get_db)):
     return crud_create_sensor(db, sensor)
 
 
-@router.put('/{name}/status_code', status_code=status.HTTP_204_NO_CONTENT)
+@router.put('/{name}/status_code', response_model=Sensor)
 def update_sensor_status_code(name: str, status_code: int, db: Session = Depends(get_db)):
-    result = crud_update_sensor_status(db, name, status_code)
-    if result == 0:
-        raise HTTPException(detail='Sensor not found', status_code=status.HTTP_404_NOT_FOUND)
+    return crud_update_sensor_status(db, name, status_code)
 
 
 @router.put('/{name}/block', status_code=status.HTTP_204_NO_CONTENT)
@@ -35,13 +33,10 @@ def update_sensor_block(name: str, block: str, db: Session = Depends(get_db)):
 
 @router.get('/{name}', response_model=SensorExtended)
 def get_sensor_by_name(name: str, start_time: int = 0, end_time: int = 0, db: Session = Depends(get_db)):
-    result = crud_read_sensor_by_name(db, name, start_time, end_time)
-    if result == 0:
-        raise HTTPException(detail='Sensor not found', status_code=status.HTTP_404_NOT_FOUND)
-    return result
+    return crud_read_sensor_by_name(db, name, start_time, end_time)
 
 
-@router.get('/{status_code}', response_model=list[Sensor])
+@router.get('/status_code/{status_code}', response_model=list[Sensor])
 def get_sensor_by_status_code(status_code: int, db: Session = Depends(get_db)):
     result = crud_read_sensor_by_status(db, status_code)
     return result
@@ -49,10 +44,7 @@ def get_sensor_by_status_code(status_code: int, db: Session = Depends(get_db)):
 
 @router.get('/block/{block}', response_model=list[Sensor])
 def get_sensors_by_block(block: str, db: Session = Depends(get_db)):
-    result = crud_read_sensors_by_block(db, block)
-    if result == 0:
-        raise HTTPException(detail='Block not found', status_code=status.HTTP_404_NOT_FOUND)
-    return result
+    return crud_read_sensors_by_block(db, block)
 
 
 # TODO: Remove this before returning
