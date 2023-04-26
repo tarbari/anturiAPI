@@ -53,7 +53,7 @@
 | "t001"     | 0                 | 1681976474                 |
 
 - Error events are saved as a separate table
-- When an error occurs the sensor sends an error message with the code and timestamp to the api
+- When an error occurs the sensor sends a change status code message to the api
 - We also save the status code change back to 0
     - This won't come from the sensor itself, but from the admin panel
     - If in the future the sensors are able to fix themselves, this should work as well
