@@ -88,8 +88,8 @@
 - Show one specific sensor
 - By default 10 latest measurements
 - Two optional query parameters for start and end timestamps
-    - `start` (unix timestamp)
-    - `end` (unix timestamp)
+    - `start_time` (unix timestamp)
+    - `end_time` (unix timestamp)
 
 `Return:`
 
@@ -185,16 +185,17 @@
 
 ### GET /errors
 
-- TODO: This needs to be thought through
-- Show graph with errors and their times
+- Get all errors from all sensors
 
 ```json
 [
   {
+    "name": "t000",
     "timestamp": 1681976464,
     "status_code": 1
   },
   {
+    "name": "t001",
     "timestamp": 1681976474,
     "status_code": 0
   }

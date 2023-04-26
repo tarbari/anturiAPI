@@ -5,11 +5,13 @@ class MeasurementIn(BaseModel):
     name: str
     value: float
     type: str
+
+    class Config:
+        orm_mode = True
+
+
+class Measurement(MeasurementIn):
     timestamp: int
-
-
-class MeasurementDb(MeasurementIn):
-    id: int
 
 
 class Sensor(BaseModel):
@@ -23,14 +25,17 @@ class Sensor(BaseModel):
 
 
 class SensorExtended(Sensor):
-    measurements: list[MeasurementIn]
+    measurements: list[Measurement]
 
 
-class ErrorIn(BaseModel):
+class Error(BaseModel):
     name: str
     status_code: int
     timestamp: int
 
+    class Config:
+        orm_mode = True
 
-class ErrorDb(ErrorIn):
+
+class ErrorDb(Error):
     id: int

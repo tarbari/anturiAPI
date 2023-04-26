@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Float
 from .initialize_database import Base
 
 
@@ -10,8 +10,8 @@ class Sensors(Base):
     status_code = Column(Integer, nullable=False)
 
 
-class Error(Base):
-    __tablename__ = 'error'
+class Errors(Base):
+    __tablename__ = 'errors'
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     status_code = Column(Integer, nullable=False)
@@ -23,4 +23,5 @@ class Measurements(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     type = Column(String, nullable=False)
+    value = Column(Float, nullable=False)
     timestamp = Column(Integer, nullable=False)

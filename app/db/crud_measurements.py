@@ -1,11 +1,28 @@
-# TODO: Needs work
+import time
 from sqlalchemy.orm import Session
+from fastapi import HTTPException, status
 from app.db.schemas import MeasurementIn
+from app.db.models import Measurements, Sensors
 
 
 def crud_create_measurement(db: Session, measurement: MeasurementIn):
-    return 0
+    new_measurement = Measurements(**measurement.dict())
+    # Making sure the sensor exists
+    sensor = db.query(Sensors).filter(Sensors.name == measurement.name).first()
+    if sensor is None:
+        raise HTTPException(detail=f'Sensor not found. Name: {measurement.name}', status_code=status.HTTP_404_NOT_FOUND)
+    new_measurement.timestamp = int(time.time())
+    new_measurement.value = round(measurement.value, 1)
+    db.add(new_measurement)
+    db.commit()
 
 
 def crud_delete_measurement(db: Session, name: str, timestamp: int):
-    return 0
+    db.query(Measurements).filter(Measurements.name == name, Measurements.timestamp == timestamp).delete()
+    db.commit()
+
+
+# TODO: Remove this before returning
+def crud_read_all_measurements(db: Session):
+    result = db.query(Measurements).all()
+    return result

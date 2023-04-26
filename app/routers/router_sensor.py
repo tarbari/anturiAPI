@@ -38,11 +38,10 @@ def get_sensor_by_name(name: str, start_time: int = 0, end_time: int = 0, db: Se
 
 @router.get('/status_code/{status_code}', response_model=list[Sensor])
 def get_sensor_by_status_code(status_code: int, db: Session = Depends(get_db)):
-    result = crud_read_sensor_by_status(db, status_code)
-    return result
+    return crud_read_sensor_by_status(db, status_code)
 
 
-@router.get('/block/{block}', response_model=list[Sensor])
+@router.get('/block/{block}', response_model=list[SensorExtended])
 def get_sensors_by_block(block: str, db: Session = Depends(get_db)):
     return crud_read_sensors_by_block(db, block)
 
