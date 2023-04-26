@@ -55,3 +55,10 @@ hetkellä toteutuksessa on ylimääräisiä importteja, jotka näyttävät pää
 moduulit saattaa tulla käyttöön muiden importtien kautta. Esimerkiksi `./app/routers/router_measurements.py`
 tiedostossa `from sqlalchemy.orm import Session` on teknisesti ottaen tarpeeton sillä sama `Session` tulee myös
 myöhemmin kohdassa `from app.db.crud_measurements import *`.
+
+---
+
+## Infoa tarkistusta varten
+
+`database.db`:ssä on valmiiksi anturit `t000 - t004` ja lohkot `A00 - A03`. Lisäksi kaikilla antureilla on vähintäänkin
+muutamia mittaustuloksia. Virhelokissa on myös muutamia virherivejä jo valmiiksi.
