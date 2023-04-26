@@ -20,9 +20,3 @@ def crud_create_measurement(db: Session, measurement: MeasurementIn):
 def crud_delete_measurement(db: Session, name: str, timestamp: int):
     db.query(Measurements).filter(Measurements.name == name, Measurements.timestamp == timestamp).delete()
     db.commit()
-
-
-# TODO: Remove this before returning
-def crud_read_all_measurements(db: Session):
-    result = db.query(Measurements).all()
-    return result

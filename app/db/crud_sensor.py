@@ -93,7 +93,7 @@ def crud_update_sensor_block(db: Session, name: str, block: str):
     return db_sensor
 
 
-# TODO: Remove this before returning
+# This is not in spec, but it definitely is good to have
 def crud_destroy_sensor(db: Session, name: str):
     result = db.query(Sensors).filter(Sensors.name == name).delete()
     db.commit()

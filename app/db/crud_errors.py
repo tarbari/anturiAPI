@@ -1,4 +1,3 @@
-# TODO: Needs work
 from sqlalchemy.orm import Session
 from fastapi import HTTPException, status
 from app.db.models import Errors

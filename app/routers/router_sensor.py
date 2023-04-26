@@ -46,7 +46,7 @@ def get_sensors_by_block(block: str, db: Session = Depends(get_db)):
     return crud_read_sensors_by_block(db, block)
 
 
-# TODO: Remove this before returning
+# This is not in spec, but it definitely is good to have
 @router.delete('/{name}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_sensor(name: str, db: Session = Depends(get_db)):
     result = crud_destroy_sensor(db, name)

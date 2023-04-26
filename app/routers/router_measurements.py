@@ -15,9 +15,3 @@ def create_new_measurement(measurement: MeasurementIn, db: Session = Depends(get
 @router.delete('', status_code=status.HTTP_204_NO_CONTENT)
 def delete_measurements(name: str, timestamp: int, db: Session = Depends(get_db)):
     crud_delete_measurement(db, name, timestamp)
-
-
-# TODO: Remove this before returning
-@router.get('', status_code=status.HTTP_200_OK, response_model=list[Measurement])
-def get_all_measurements(db: Session = Depends(get_db)):
-    return crud_read_all_measurements(db)
